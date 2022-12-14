@@ -30,6 +30,14 @@ public:
 
 
 	// 3rd Methods
+	//Methods for Sum
+	long double sum(const std::vector<double>&);
+	long double sum(const std::vector<int>&);
+	//Methods for Mean
+	double mean(const std::vector<double>&);
+	double mean(const std::vector<int>&);
+	//Method for Population Variance
+	double populationVariance(const std::vector<double>&, double mean);
 
 	// 2.2 Methods
 
@@ -39,11 +47,26 @@ public:
 
 	// 1st Methods
 
-
 };
 
 // Class Implementation
+	long double Grade::sum(const std::vector<double>& data) {
+		return 0;
+	}
+	long double Grade::sum(const std::vector<int>& data) {
+		return 0;
+	}
 
+	double Grade::mean(const std::vector<double>& data) {
+		return 0;
+	}
+	double Grade::mean(const std::vector<int>&) {
+		return 0;
+	}
+
+	double Grade::populationVariance(const std::vector<double>& data, double mean) {
+		return 0;
+	}
 // Sample code passed test
 double Grade::add(double dataItem1, double dataItem2) {
 	return dataItem1 + dataItem2;
