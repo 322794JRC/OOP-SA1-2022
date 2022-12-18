@@ -50,26 +50,34 @@ public:
 };
 
 // Class Implementation
-	long double Grade::sum(const std::vector<double>& data) {
-		if (std::vector<double>::empty) throw std::invalid_argument("Your Vector is empty!");
+//Finding the sum for a Vector of doubles.
+long double Grade::sum(const std::vector<double>& data) {
+	if (data.empty()) {
+		throw std::invalid_argument("Your vector is empty!");
+	}
+	else {
 		long double addedSum = 0;
 		for (int Counter = 0; Counter < data.size(); Counter++) {
 			addedSum += data[Counter];
-			return addedSum;
 		}
-
-		return 0;
+		return addedSum;
 	}
-	long double Grade::sum(const std::vector<int>& data) {
-		if (std::vector<int>::empty) throw std::invalid_argument("Your Vector is empty!");
+	return 0;
+}
+//Finding the sum for a Vector of integers.
+long double Grade::sum(const std::vector<int>& data) {
+	if (data.empty()) {
+		throw std::invalid_argument("Your vector is empty!");
+	}
+	else {
 		long double addedSum = 0;
 		for (int Counter = 0; Counter < data.size(); Counter++) {
 			addedSum += data[Counter];
-			return addedSum;
 		}
-
-		return 0;
+		return addedSum;
 	}
+	return 0;
+}
 
 	double Grade::mean(const std::vector<double>& data) {
 		return 0;
