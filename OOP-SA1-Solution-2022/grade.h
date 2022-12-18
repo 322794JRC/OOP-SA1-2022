@@ -78,11 +78,36 @@ long double Grade::sum(const std::vector<int>& data) {
 	}
 	return 0;
 }
-
-	double Grade::mean(const std::vector<double>& data) {
-		return 0;
+//Finding the mean for a vector of doubles
+double Grade::mean(const std::vector<double>& data) {
+	if (data.empty()) {
+		throw std::invalid_argument("Your vector is empty!");
 	}
-	double Grade::mean(const std::vector<int>&) {
+	else {
+		double mean = 0;
+		long double addedSum = 0;
+		for (int Counter = 0; Counter < data.size(); Counter++) {
+			addedSum += data[Counter];
+		}
+		mean = addedSum / data.size();
+		return mean;
+	}
+	return 0;
+}
+//Finding the mean for a vector of integers
+	double Grade::mean(const std::vector<int>& data) {
+		if (data.empty()) {
+			throw std::invalid_argument("Your vector is empty!");
+		}
+		else {
+			double mean = 0;
+			long double addedSum = 0;
+			for (int Counter = 0; Counter < data.size(); Counter++) {
+				addedSum += data[Counter];
+			}
+			mean = addedSum / data.size();
+			return mean;
+		}
 		return 0;
 	}
 
