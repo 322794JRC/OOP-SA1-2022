@@ -80,6 +80,7 @@ long double Grade::sum(const std::vector<int>& data) {
 }
 //Finding the mean for a vector of doubles
 double Grade::mean(const std::vector<double>& data) {
+	//Throws an error if the vector is empty
 	if (data.empty()) {
 		throw std::invalid_argument("Your vector is empty!");
 	}
@@ -110,8 +111,25 @@ double Grade::mean(const std::vector<double>& data) {
 		}
 		return 0;
 	}
-
+//Finding the Population Variance from a vector.
 	double Grade::populationVariance(const std::vector<double>& data, double mean) {
+		if (data.empty()) {
+			throw std::invalid_argument("Your vector is empty!");
+		}
+		else {
+			double tempValue = 0;
+			double squaredValue = 0;
+			double finalValue = 0;
+			double populationVariance = 0;
+			double tempMean = Grade::mean(data);
+			for (int Counter = 0; Counter < data.size(); Counter++) {
+				tempValue = data[Counter] - tempMean;
+				squaredValue = tempValue * tempValue;
+				finalValue += squaredValue;
+			}
+			populationVariance = finalValue / data.size();
+			return populationVariance;
+		}
 		return 0;
 	}
 // Sample code passed test
