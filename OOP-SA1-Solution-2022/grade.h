@@ -117,14 +117,17 @@ double Grade::mean(const std::vector<double>& data) {
 			throw std::invalid_argument("Your vector is empty!");
 		}
 		else {
-			double tempValue = 0;
-			double squaredValue = 0;
 			double finalValue = 0;
 			double populationVariance = 0;
-			double tempMean = Grade::mean(data);
+			double mean = 0;
+			long double addedSum = 0;
 			for (int Counter = 0; Counter < data.size(); Counter++) {
-				tempValue = data[Counter] - tempMean;
-				squaredValue = tempValue * tempValue;
+				addedSum += data[Counter];
+			}
+			mean = addedSum / data.size();
+			for (int Counter = 0; Counter < data.size(); Counter++) {
+				double tempValue = data[Counter] - mean;
+				double squaredValue = tempValue * tempValue;
 				finalValue += squaredValue;
 			}
 			populationVariance = finalValue / data.size();
