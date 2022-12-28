@@ -52,6 +52,7 @@ public:
 // Class Implementation
 //Finding the sum for a Vector of doubles.
 	long double Grade::sum(const std::vector<double>& data) {
+		//Throws an error if the vector is empty
 		if (data.empty()) {
 			throw std::invalid_argument("Your vector is empty!");
 		}
@@ -66,6 +67,7 @@ public:
 	}
 //Finding the sum for a Vector of integers.
 	long double Grade::sum(const std::vector<int>& data) {
+		//Throws an error if the vector is empty
 		if (data.empty()) {
 			throw std::invalid_argument("Your vector is empty!");
 		}
@@ -96,6 +98,7 @@ public:
 	}
 //Finding the mean for a vector of integers
 	double Grade::mean(const std::vector<int>& data) {
+		//Throws an error if the vector is empty
 		if (data.empty()) {
 			throw std::invalid_argument("Your vector is empty!");
 		}
@@ -117,12 +120,14 @@ public:
 		else {
 			double finalValue = 0;
 			double vectorMean = Grade::mean(data);
-			for (int Counter = 0; Counter < data.size(); Counter++) {
-				double tempValue = (data[Counter] - vectorMean);
-				finalValue += (tempValue * tempValue);
+			for (int popCounter = 0; popCounter < data.size(); popCounter++) {
+				finalValue += (data[popCounter] - vectorMean) * (data[popCounter] - vectorMean);
 			}
+			/*
 			double populationVariance = finalValue / data.size();
 			return populationVariance;
+			*/
+			return finalValue;
 		}
 		return 0;
 	}
