@@ -50,21 +50,85 @@ public:
 };
 
 // Class Implementation
+//Finding the sum for a Vector of doubles.
 	long double Grade::sum(const std::vector<double>& data) {
+		//Throws an error if the vector is empty
+		if (data.empty()) {
+			throw std::invalid_argument("Your vector is empty!");
+		}
+		else {
+			long double addedSum = 0;
+			for (int Counter = 0; Counter < data.size(); Counter++) {
+				addedSum += data[Counter];
+			}
+			return addedSum;
+		}
 		return 0;
 	}
+//Finding the sum for a Vector of integers.
 	long double Grade::sum(const std::vector<int>& data) {
+		//Throws an error if the vector is empty
+		if (data.empty()) {
+			throw std::invalid_argument("Your vector is empty!");
+		}
+		else {
+			long double addedSum = 0;
+			for (int Counter = 0; Counter < data.size(); Counter++) {
+				addedSum += data[Counter];
+			}
+			return addedSum;
+		}
 		return 0;
 	}
-
+//Finding the mean for a vector of doubles
 	double Grade::mean(const std::vector<double>& data) {
+		//Throws an error if the vector is empty
+		if (data.empty()) {
+			throw std::invalid_argument("Your vector is empty!");
+		}
+		else {
+			long double addedSum = 0;
+			for (int Counter = 0; Counter < data.size(); Counter++) {
+				addedSum += data[Counter];
+			}
+			double mean = addedSum / data.size();
+			return mean;
+		}
 		return 0;
 	}
-	double Grade::mean(const std::vector<int>&) {
+//Finding the mean for a vector of integers
+	double Grade::mean(const std::vector<int>& data) {
+		//Throws an error if the vector is empty
+		if (data.empty()) {
+			throw std::invalid_argument("Your vector is empty!");
+		}
+		else {
+			long double addedSum = 0;
+			for (int Counter = 0; Counter < data.size(); Counter++) {
+				addedSum += data[Counter];
+			}
+			double mean = addedSum / data.size();
+			return mean;
+		}
 		return 0;
 	}
-
+//Finding the Population Variance from a vector.
 	double Grade::populationVariance(const std::vector<double>& data, double mean) {
+		if (data.empty()) {
+			throw std::invalid_argument("Your vector is empty!");
+		}
+		else {
+			double finalValue = 0;
+			double vectorMean = Grade::mean(data);
+			for (int popCounter = 0; popCounter < data.size(); popCounter++) {
+				finalValue += (data[popCounter] - vectorMean) * (data[popCounter] - vectorMean);
+			}
+			/*
+			double populationVariance = finalValue / data.size();
+			return populationVariance;
+			*/
+			return finalValue;
+		}
 		return 0;
 	}
 // Sample code passed test
