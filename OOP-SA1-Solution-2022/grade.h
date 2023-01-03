@@ -91,8 +91,7 @@ public:
 			for (int Counter = 0; Counter < data.size(); Counter++) {
 				addedSum += data[Counter];
 			}
-			double mean = addedSum / data.size();
-			return mean;
+			return addedSum / data.size();
 		}
 		return 0;
 	}
@@ -107,8 +106,7 @@ public:
 			for (int Counter = 0; Counter < data.size(); Counter++) {
 				addedSum += data[Counter];
 			}
-			double mean = addedSum / data.size();
-			return mean;
+			return addedSum / data.size();
 		}
 		return 0;
 	}
@@ -123,11 +121,7 @@ public:
 			for (int popCounter = 0; popCounter < data.size(); popCounter++) {
 				finalValue += (data[popCounter] - vectorMean) * (data[popCounter] - vectorMean);
 			}
-			/*
-			double populationVariance = finalValue / data.size();
-			return populationVariance;
-			*/
-			return finalValue;
+			return finalValue / data.size();
 		}
 		return 0;
 	}
