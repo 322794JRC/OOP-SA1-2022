@@ -30,18 +30,22 @@ public:
 
 
 	// 3rd Methods
-	//Methods for Sum
+	//Methods for sum.
 	long double sum(const std::vector<double>&);
 	long double sum(const std::vector<int>&);
-	//Methods for Mean
+	//Methods for Mean.
 	double mean(const std::vector<double>&);
 	double mean(const std::vector<int>&);
-	//Method for Population Variance
+	//Method for Population Variance.
 	double populationVariance(const std::vector<double>&, double mean);
 
 	// 2.2 Methods
-
-
+	//Method for standard deviation.
+	long double standardDeviation(const std::vector<double>&, double mean);
+	//Method for high performing learners.
+	std::vector<std::string> highPerformingLearners(std::map<std::string, double>);
+	//Method for low performing learners.
+	std::vector<std::string> lowPerformingLearners(std::map<std::string, double>);
 	// 2.1 Methods
 
 
@@ -125,6 +129,24 @@ public:
 		}
 		return 0;
 	}
+
+//Code for the 2.2 Methods
+//Finding the Standard Deviation from a vector.
+	long double Grade::standardDeviation(const std::vector<double>& data, double populationVariance) {
+		return 0;
+	}
+//Finding the high performing learners from a map using standard deviation.
+	std::vector<std::string> Grade::highPerformingLearners(std::map<std::string, double> data) {
+		std::vector<std::string> highPerformers;
+		return highPerformers;
+	}
+	
+//Finding the low performing learners from a map using standard deviation.
+	std::vector<std::string> Grade::lowPerformingLearners(std::map<std::string, double> data) {
+		std::vector<std::string> lowPerformers;
+		return lowPerformers;
+	}
+
 // Sample code passed test
 double Grade::add(double dataItem1, double dataItem2) {
 	return dataItem1 + dataItem2;
@@ -133,7 +155,6 @@ double Grade::add(double dataItem1, double dataItem2) {
 // Sample code failed test (error in the code)
 double Grade::subtract(double dataItem1, double dataItem2) {
 	// Uncomment the line below to fix the failed test
-	// return dataItem1 - dataItem2;
-	return dataItem1 - dataItem1;
+	return dataItem1 - dataItem2;
 	
 }
