@@ -132,9 +132,19 @@ public:
 
 //Code for the 2.2 Methods
 //Finding the Standard Deviation from a vector.
-	long double Grade::standardDeviation(const std::vector<double>& data, double populationVariance) {
+	long double Grade::standardDeviation(const std::vector<double>& data, double mean) {
 		if (data.empty()) {
 			throw std::invalid_argument("Your vector is empty!");
+		}
+		else {
+			long double finalValue = 0;
+			long double popVariance = 0;
+			double vectorMean = Grade::mean(data);
+			for (int popCounter = 0; popCounter < data.size(); popCounter++) {
+				finalValue += (data[popCounter] - vectorMean) * (data[popCounter] - vectorMean);
+			}
+			popVariance = finalValue / data.size();
+			return sqrt(popVariance);
 		}
 		return 0;
 	}
