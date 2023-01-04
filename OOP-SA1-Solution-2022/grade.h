@@ -133,16 +133,25 @@ public:
 //Code for the 2.2 Methods
 //Finding the Standard Deviation from a vector.
 	long double Grade::standardDeviation(const std::vector<double>& data, double populationVariance) {
+		if (data.empty()) {
+			throw std::invalid_argument("Your vector is empty!");
+		}
 		return 0;
 	}
 //Finding the high performing learners from a map using standard deviation.
 	std::vector<std::string> Grade::highPerformingLearners(std::map<std::string, double> data) {
+		if (data.empty()) {
+			throw std::invalid_argument("Your vector is empty!");
+		}
 		std::vector<std::string> highPerformers;
 		return highPerformers;
 	}
 	
 //Finding the low performing learners from a map using standard deviation.
 	std::vector<std::string> Grade::lowPerformingLearners(std::map<std::string, double> data) {
+		if (data.empty()) {
+			throw std::invalid_argument("Your vector is empty!");
+		}
 		std::vector<std::string> lowPerformers;
 		return lowPerformers;
 	}
