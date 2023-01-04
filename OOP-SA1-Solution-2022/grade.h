@@ -43,9 +43,9 @@ public:
 	//Method for standard deviation.
 	long double standardDeviation(const std::vector<double>&, double mean);
 	//Method for high performing learners.
-	std::vector<std::string> highPerformingLearners(std::map<std::string, double>);
+	std::vector<std::string> highPerformingLearners(const std::map<std::string, double>& data);
 	//Method for low performing learners.
-	std::vector<std::string> lowPerformingLearners(std::map<std::string, double>);
+	std::vector<std::string> lowPerformingLearners(const std::map<std::string, double>& data);
 	// 2.1 Methods
 
 
@@ -149,18 +149,60 @@ public:
 		return 0;
 	}
 //Finding the high performing learners from a map using standard deviation.
-	std::vector<std::string> Grade::highPerformingLearners(std::map<std::string, double> data) {
+	std::vector<std::string> Grade::highPerformingLearners(const std::map<std::string, double>& data) {
 		if (data.empty()) {
 			throw std::invalid_argument("Your vector is empty!");
+		}
+		else {
+			long double sum = 0;
+			long double stepTwo = 0;
+			std::map<std::string, double> learnerGrades = data;
+			for (std::pair<std::string, double> grade : learnerGrades) {
+				sum += grade.second;
+			}
+			double mean = sum / data.size();
+			for (std::pair<std::string, double> grade : learnerGrades) {
+				stepTwo += (grade.second - mean) * (grade.second - mean);
+			}
+			double popVariance = stepTwo / data.size();
+			double stdDeviation = sqrt(popVariance);
+			std::vector<std::string> highPerformers;
+			for (std::pair<std::string, double> grade : learnerGrades) {
+				if (grade.second > mean + stdDeviation) {
+					highPerformers.push_back(grade.first);
+				}
+			}
+			return highPerformers;
 		}
 		std::vector<std::string> highPerformers;
 		return highPerformers;
 	}
 	
 //Finding the low performing learners from a map using standard deviation.
-	std::vector<std::string> Grade::lowPerformingLearners(std::map<std::string, double> data) {
+	std::vector<std::string> Grade::lowPerformingLearners(const std::map<std::string, double>& data) {
 		if (data.empty()) {
 			throw std::invalid_argument("Your vector is empty!");
+		}
+		else {
+			long double sum = 0;
+			long double stepTwo = 0;
+			std::map<std::string, double> learnerGrades = data;
+			for (std::pair<std::string, double> grade : learnerGrades) {
+				sum += grade.second;
+			}
+			double mean = sum / data.size();
+			for (std::pair<std::string, double> grade : learnerGrades) {
+				stepTwo += (grade.second - mean) * (grade.second - mean);
+			}
+			double popVariance = stepTwo / data.size();
+			double stdDeviation = sqrt(popVariance);
+			std::vector<std::string> lowPerformers;
+			for (std::pair<std::string, double> grade : learnerGrades) {
+				if (grade.second < mean - stdDeviation) {
+					lowPerformers.push_back(grade.first);
+				}
+			}
+			return lowPerformers;
 		}
 		std::vector<std::string> lowPerformers;
 		return lowPerformers;
