@@ -24,11 +24,6 @@ private:
 protected:
 
 public:
-	// Sample 
-	double add(double dataItem1, double dataItem2);
-	double subtract(double dataItem1, double dataItem2);
-
-
 	// 3rd Methods
 	//Methods for sum.
 	long double sum(const std::vector<double>&);
@@ -41,24 +36,18 @@ public:
 
 	// 2.2 Methods
 	//Method for standard deviation.
-	long double standardDeviation(const std::vector<double>&, double mean);
+	long double standardDeviation(const std::vector<double>&, double populationVariance);
 	//Method for high performing learners.
-	std::vector<std::string> highPerformingLearners(std::map<std::string, double>);
+	std::vector<std::string> highPerformingLearners(const std::map<std::string, double>& data);
 	//Method for low performing learners.
-	std::vector<std::string> lowPerformingLearners(std::map<std::string, double>);
-	// 2.1 Methods
-
-
-	// 1st Methods
-
+	std::vector<std::string> lowPerformingLearners(const std::map<std::string, double>& data);
 };
 
 // Class Implementation
 //Finding the sum for a Vector of doubles.
 	long double Grade::sum(const std::vector<double>& data) {
-		//Throws an error if the vector is empty
 		if (data.empty()) {
-			throw std::invalid_argument("Your vector is empty!");
+			throw std::invalid_argument("Your vector is empty!"); //Throws an error if the vector is empty
 		}
 		else {
 			long double addedSum = 0;
@@ -71,9 +60,8 @@ public:
 	}
 //Finding the sum for a Vector of integers.
 	long double Grade::sum(const std::vector<int>& data) {
-		//Throws an error if the vector is empty
 		if (data.empty()) {
-			throw std::invalid_argument("Your vector is empty!");
+			throw std::invalid_argument("Your vector is empty!"); //Throws an error if the vector is empty
 		}
 		else {
 			long double addedSum = 0;
@@ -86,9 +74,8 @@ public:
 	}
 //Finding the mean for a vector of doubles
 	double Grade::mean(const std::vector<double>& data) {
-		//Throws an error if the vector is empty
 		if (data.empty()) {
-			throw std::invalid_argument("Your vector is empty!");
+			throw std::invalid_argument("Your vector is empty!"); //Throws an error if the vector is empty
 		}
 		else {
 			long double addedSum = 0;
@@ -101,9 +88,8 @@ public:
 	}
 //Finding the mean for a vector of integers
 	double Grade::mean(const std::vector<int>& data) {
-		//Throws an error if the vector is empty
 		if (data.empty()) {
-			throw std::invalid_argument("Your vector is empty!");
+			throw std::invalid_argument("Your vector is empty!"); //Throws an error if the vector is empty
 		}
 		else {
 			long double addedSum = 0;
@@ -117,13 +103,13 @@ public:
 //Finding the Population Variance from a vector.
 	double Grade::populationVariance(const std::vector<double>& data, double mean) {
 		if (data.empty()) {
-			throw std::invalid_argument("Your vector is empty!");
+			throw std::invalid_argument("Your vector is empty!"); //Throws an error if the vector is empty
 		}
 		else {
 			double finalValue = 0;
 			double vectorMean = Grade::mean(data);
-			for (int popCounter = 0; popCounter < data.size(); popCounter++) {
-				finalValue += (data[popCounter] - vectorMean) * (data[popCounter] - vectorMean);
+			for (int Counter = 0; Counter < data.size(); Counter++) {
+				finalValue += (data[Counter] - vectorMean) * (data[Counter] - vectorMean);
 			}
 			return finalValue / data.size();
 		}
@@ -133,28 +119,90 @@ public:
 //Code for the 2.2 Methods
 //Finding the Standard Deviation from a vector.
 	long double Grade::standardDeviation(const std::vector<double>& data, double populationVariance) {
+		if (data.empty()) {
+			throw std::invalid_argument("Your vector is empty!"); //Throws an error if the vector is empty
+		}
+		else {
+			double mean = Grade::mean(data); //Brings in the previously defined mean method to be used in the next step.
+			double popVariance = Grade::populationVariance(data, mean); //Uses the previously defined population variance method to avoid a repeat of code.
+			return sqrt(popVariance);
+		}
 		return 0;
 	}
 //Finding the high performing learners from a map using standard deviation.
-	std::vector<std::string> Grade::highPerformingLearners(std::map<std::string, double> data) {
+	std::vector<std::string> Grade::highPerformingLearners(const std::map<std::string, double>& data) {
+		if (data.empty()) {
+			throw std::invalid_argument("Your vector is empty!"); //Throws an error if the map is empty
+		}
+		else {
+			long double sum = 0;
+			long double stepTwo = 0;
+			std::map<std::string, double> learnerGrades = data;
+			for (std::pair<std::string, double> grade : learnerGrades) {
+				sum += grade.second;
+			}
+			double mean = sum / data.size();
+			for (std::pair<std::string, double> grade : learnerGrades) {
+				stepTwo += (grade.second - mean) * (grade.second - mean);
+			}
+			double popVariance = stepTwo / data.size();
+			double stdDeviation = sqrt(popVariance);
+			std::vector<std::string> highPerformers;
+			for (std::pair<std::string, double> grade : learnerGrades) {
+				if (grade.second > mean + stdDeviation) {
+					highPerformers.push_back(grade.first);
+				}
+			}
+			/* 
+			//Code I wrote to try optimise highPerformingLearners/lowPerformingLearners. Unfortunately struggled to get it functional
+			//So I am sticking with the functional code that already passes tests.
+			std::map<std::string, double> learnerGrades = data;
+			std::vector<double> scores;
+			for (std::pair<std::string, double> grade : learnerGrades) {
+				scores.push_back(grade.second);
+			}
+			double mean = Grade::mean(scores);
+			double popVariance = Grade::populationVariance(scores, mean);
+			long double standardDev = sqrt(popVariance);
+			std::vector<std::string> highPerformers;
+			for (std::pair<std::string, double> grade : learnerGrades) {
+				if (grade.second > mean + standardDev) {
+					highPerformers.push_back(grade.first);
+				}
+			}
+			*/
+			return highPerformers;
+		}
 		std::vector<std::string> highPerformers;
 		return highPerformers;
 	}
 	
 //Finding the low performing learners from a map using standard deviation.
-	std::vector<std::string> Grade::lowPerformingLearners(std::map<std::string, double> data) {
+	std::vector<std::string> Grade::lowPerformingLearners(const std::map<std::string, double>& data) {
+		if (data.empty()) {
+			throw std::invalid_argument("Your vector is empty!");
+		}
+		else {
+			long double sum = 0;
+			long double stepTwo = 0;
+			std::map<std::string, double> learnerGrades = data;
+			for (std::pair<std::string, double> grade : learnerGrades) {
+				sum += grade.second;
+			}
+			double mean = sum / data.size();
+			for (std::pair<std::string, double> grade : learnerGrades) {
+				stepTwo += (grade.second - mean) * (grade.second - mean);
+			}
+			double popVariance = stepTwo / data.size();
+			double stdDeviation = sqrt(popVariance);
+			std::vector<std::string> lowPerformers;
+			for (std::pair<std::string, double> grade : learnerGrades) {
+				if (grade.second < mean - stdDeviation) {
+					lowPerformers.push_back(grade.first);
+				}
+			}
+			return lowPerformers;
+		}
 		std::vector<std::string> lowPerformers;
 		return lowPerformers;
 	}
-
-// Sample code passed test
-double Grade::add(double dataItem1, double dataItem2) {
-	return dataItem1 + dataItem2;
-}
-
-// Sample code failed test (error in the code)
-double Grade::subtract(double dataItem1, double dataItem2) {
-	// Uncomment the line below to fix the failed test
-	return dataItem1 - dataItem2;
-	
-}
